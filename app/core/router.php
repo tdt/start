@@ -22,6 +22,16 @@ if (!isset($_SERVER["REQUEST_URI"])){
 	}
 }
 
+// Drop subdir from the request
+$subdir = tdt\framework\Config::get("general","subdir");
+if(!empty($subdir)){
+	try{
+		$_SERVER["REQUEST_URI"] = preg_replace("/^\/?" . str_replace('/','\/',$subdir). "/", "", $_SERVER["REQUEST_URI"]);
+	}catch(Exception $e){
+		// Couldn't convert subdir to a regular expression
+	}
+}
+
 // Fetch the routes from the config
 $allroutes = tdt\framework\Config::get("routes");
 
@@ -52,7 +62,7 @@ catch(tdt\framework\TDTException $e){
 }
 catch(Exception $e){
 	$log->logCrit($e->getMessage());
-	setErrorHeader(500,"Internal Server Error");
+	set_error_header(500,"Internal Server Error");
 	//add a javascript redirect to an error page
 	echo "<script>location = \"" . tdt\framework\Config::get("general","hostname") . tdt\framework\Config::get("general","subdir") . "error/critical/\";</script>";
 }

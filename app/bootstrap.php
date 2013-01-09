@@ -16,6 +16,12 @@ require_once VENDORPATH . "autoload.php";
 // Load the configurator
 require_once APPPATH . "core/configurator.php";
 
+// Load the error and documentation controllers
+require_once APPPATH . "controllers/ErrorController.class.php";
+require_once APPPATH . "controllers/DocumentationController.class.php";
+
+$c = new ErrorController();
+
 // Keep cores as the last item
 $config_files = array(
 	"general",

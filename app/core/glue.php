@@ -29,57 +29,54 @@
  */
 class Glue {
 
-    /**
-     * stick
-     *
-     * the main static function of the glue class.
-     *
-     * @param   array    	$urls  	    The regex-based url to class mapping
-     * @throws  Exception               Thrown if corresponding class is not found
-     * @throws  Exception               Thrown if no match is found
-     * @throws  BadMethodCallException  Thrown if a corresponding GET,POST is not found
-     *
-     */
+	/**
+	 * stick
+	 *
+	 * the main static function of the glue class.
+	 *
+	 * @param   array    	$urls  	    The regex-based url to class mapping
+	 * @throws  Exception               Thrown if corresponding class is not found
+	 * @throws  Exception               Thrown if no match is found
+	 * @throws  BadMethodCallException  Thrown if a corresponding GET,POST is not found
+	 *
+	 */
 
-    static function stick ($urls) {
-        $method = strtoupper($_SERVER['REQUEST_METHOD']);
-        $HTTPheaders = getallheaders();
-        if(isset($HTTPheaders["X-HTTP-Method-Override"])){
-            $method = strtoupper($HTTPheaders["X-HTTP-Method-Override"]);
-        }
+	static function stick ($urls) {
+		$method = strtoupper($_SERVER['REQUEST_METHOD']);
+		$HTTPheaders = getallheaders();
+		if(isset($HTTPheaders["X-HTTP-Method-Override"])){
+			$method = strtoupper($HTTPheaders["X-HTTP-Method-Override"]);
+		}
 
-        $path = $_SERVER['REQUEST_URI'];
-        if(strlen(tdt\framework\Config::get("general", "subdir")) > 0) {
-            $path = substr($path,strlen(tdt\framework\Config::get("general", "subdir")));
-        }
+		$path = $_SERVER['REQUEST_URI'];
 
-        $found = false;
+		$found = false;
 
-        krsort($urls);
+		krsort($urls);
 
-        foreach ($urls as $regex => $class) {
-            $classa = explode(".",$class);
-            $class = $classa[0];
-            $regex = str_replace('/', '\/', $regex);
-            $regex = '^' . $regex . '\/?$';
-            if (preg_match("/$regex/i", $path, $matches)) {
-                $found = true;
-                if (class_exists($class)) {
-                    $obj = new $class;
-                    if (method_exists($obj, $method)) {
-                        $obj->$method($matches);
-                    } else {
-                        throw new tdt\framework\TDTException(450,array($path,$method));
-                    }
-                } else {
-                    throw new tdt\framework\TDTException(551,array($class));
-                }
-                break;
-            }
-        }
-        if (!$found) {
-            throw new tdt\framework\TDTException(404, array($path));
-        }
+		foreach ($urls as $regex => $class) {
+			$classa = explode(".",$class);
+			$class = $classa[0];
+			$regex = str_replace('/', '\/', $regex);
+			$regex = '^' . $regex . '\/?$';
+			if (preg_match("/$regex/i", $path, $matches)) {
+				$found = true;
+				if (class_exists($class)) {
+					$obj = new $class;
+					if (method_exists($obj, $method)) {
+						$obj->$method($matches);
+					} else {
+						throw new tdt\framework\TDTException(450,array($path,$method));
+					}
+				} else {
+					throw new tdt\framework\TDTException(551,array($class));
+				}
+				break;
+			}
+		}
+		if (!$found) {
+			throw new tdt\framework\TDTException(404, array($path));
+		}
 
-    }
+	}
 }
