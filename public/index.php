@@ -7,7 +7,7 @@
  */
 
 // Set the environment for error reporting
-define('ENVIRONMENT', 'production');
+define('ENVIRONMENT', 'development');
 
 /**
  * Alright, here we go!
@@ -50,4 +50,4 @@ defined('DATATANK_START_TIME') or define('DATATANK_START_TIME', microtime(true))
 defined('DATATANK_START_MEM') or define('DATATANK_START_MEM', memory_get_usage());
 
 // Boot the datatank
-require APPPATH.'bootstrap.php';
+require_once APPPATH.'bootstrap.php';

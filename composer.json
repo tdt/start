@@ -1,0 +1,7 @@
+{
+	"require" : {
+		"tdt/framework" : "dev-master"
+	},
+
+	"minimum-stability" : "dev"
+}

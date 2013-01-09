@@ -49,8 +49,8 @@ class Glue {
         }
 
         $path = $_SERVER['REQUEST_URI'];
-        if(strlen(Config::get("general", "subdir")) > 0) {
-            $path = substr($path,strlen(Config::get("general", "subdir")));
+        if(strlen(tdt\framework\Config::get("general", "subdir")) > 0) {
+            $path = substr($path,strlen(tdt\framework\Config::get("general", "subdir")));
         }
 
         $found = false;
@@ -69,16 +69,16 @@ class Glue {
                     if (method_exists($obj, $method)) {
                         $obj->$method($matches);
                     } else {
-                        throw new TDTException(450,array($path,$method));
+                        throw new tdt\framework\TDTException(450,array($path,$method));
                     }
                 } else {
-                    throw new TDTException(551,array($class));
+                    throw new tdt\framework\TDTException(551,array($class));
                 }
                 break;
             }
         }
         if (!$found) {
-            throw new TDTException(404, array($path));
+            throw new tdt\framework\TDTException(404, array($path));
         }
 
     }

@@ -4,8 +4,12 @@
 		// Namespace for this core
 		"namespace" : "tdt",
 		// Routes for this core
-		"route" : {
-			// Example route: "GET | example/?" : "ExampleController",
-		}
+		// Example
+		// 	routes: {
+		// 		"GET | example/?" : "ExampleController"
+		//  }
+		"routes" : null
+
+
 	}
 }
