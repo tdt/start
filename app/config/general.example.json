@@ -1,0 +1,48 @@
+{
+	// The machines hostname, add a trailing slash!
+	"hostname" : "http://localhost/",
+
+	// The webserver subdirectory, if it's not in a subdir, fill in blank. Just like $HOSTNAME, you must add a trailing slash!
+	"subdir" : "",
+
+	// The timezone of this API, for both requests as responses
+	"timezone" : "Europe/Brussels",
+
+	"defaultlanguage" : "en",
+	"defaultformat" : "json",
+
+	// Setup caching
+	"cache" : {
+		// MemCache, NoCache or APC
+		"system" : "NoCache",
+		"host" : "localhost",
+		"port" : 11211
+	},
+
+	// http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html
+	"faultinjection" : 	{
+		"enabled" : true,
+
+		// Return a 503 each {period} requests
+		"period" : 1000
+	},
+
+	// When turned off, everyone can DELETE, POST or PUT resources at will.
+	// Not recommended if ran outside localhost
+	"auth" : {
+		"enabled" : true,
+		"api_user" : "",
+		"api_passwd" : "",
+	},
+
+	// Setup logging
+	"logging" : {
+		// Based on section 4.1.1 of http://www.faqs.org/rfcs/rfc3164.html
+		// Error severity, from low to high:
+		// EMERG, ALERT, CRIT, ERR, WARN, NOTICE, INFO, DEBUG
+		"enabled" : true,
+
+		// Make sure you give write access to this or your visitors will end up in an endless loop.
+		"path" : "/var/log/"
+	}
+}

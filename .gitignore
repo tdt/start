@@ -1,0 +1,15 @@
+app/config/*
+!app/config/general.example.json
+!app/config/db.example.json
+!app/config/cores.example.json
+!app/config/routes.json
+!app/config/README.md
+
+Makefile
+*.DS_Store
+
+nbproject/*
+nbproject/private/*
+.settings
+.buildpath
+.project

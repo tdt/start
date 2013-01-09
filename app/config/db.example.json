@@ -1,0 +1,8 @@
+// The database configuration
+{
+	"system"  : "mysql",
+	"host"    : "localhost",
+	"name"    : "example",
+	"user"    : "example",
+	"password": ""
+}

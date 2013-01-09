@@ -1,0 +1,11 @@
+{
+	// Input core
+	"input" : {
+		// Namespace for this core
+		"namespace" : "tdt",
+		// Routes for this core
+		"route" : {
+			// Example route: "GET | example/?" : "ExampleController",
+		}
+	}
+}
