@@ -23,13 +23,20 @@ if (!isset($_SERVER["REQUEST_URI"])){
 }
 
 // Fetch the routes from the config
-$routes = tdt\framework\Config::get("routes");
+$allroutes = tdt\framework\Config::get("routes");
 
 
-// Only keep the routes that need the right HTTP message
-$unsetkeys = preg_grep("/^" . strtoupper($_SERVER['REQUEST_METHOD']) . "/", array_keys($routes), PREG_GREP_INVERT);
+// Only keep the routes that use the requested HTTP method
+$unsetkeys = preg_grep("/^" . strtoupper($_SERVER['REQUEST_METHOD']) . "/", array_keys($allroutes), PREG_GREP_INVERT);
 foreach($unsetkeys as $key){
-	unset($routes[$key]);
+	unset($allroutes[$key]);
+}
+
+$routes = array();
+// Drop the HTTP method from the route
+foreach($allroutes as $route => $controller){
+	$route = preg_replace('/^'.strtoupper($_SERVER['REQUEST_METHOD']).'(\s|\t)*\|(\s|\t)*/', "", trim($route));
+	$routes[trim($route)] = trim($controller);
 }
 
 $log->logInfo("The routes we are working with", $routes);
