@@ -58,11 +58,13 @@ try {
 catch(tdt\framework\TDTException $e){
 	$log->logError($e->getMessage());
 	set_error_header($e->getCode(),$e->getShort());
+	die();
 	echo "<script>location = \"" . $e->getURL() . "\";</script>";
 }
 catch(Exception $e){
 	$log->logCrit($e->getMessage());
 	set_error_header(500,"Internal Server Error");
 	//add a javascript redirect to an error page
+	die();
 	echo "<script>location = \"" . tdt\framework\Config::get("general","hostname") . tdt\framework\Config::get("general","subdir") . "error/critical/\";</script>";
 }
