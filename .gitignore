@@ -16,3 +16,4 @@ nbproject/private/*
 
 *.lock
 vendor
+logs

@@ -1,7 +1,11 @@
 {
 	"require" : {
 		"tdt/framework" : "dev-master",
+<<<<<<< HEAD
 		"tdt/core"		: "dev-master"
+=======
+                  "tdt/core" : "dev-master"  
+>>>>>>> 760e937b1da8038a70997e2c61f0743c5b11c5c5
 	},
 
 	"minimum-stability" : "dev"
