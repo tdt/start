@@ -2,7 +2,7 @@
 	// Input core
 	"input" : {
 		// Namespace for this core
-		"namespace" : "tdt",
+		"namespace" : "tdt\\input",
 		// Routes for this core
 		// Example
 		// 	routes: {

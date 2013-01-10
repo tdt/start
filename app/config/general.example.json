@@ -32,7 +32,7 @@
 	"auth" : {
 		"enabled" : true,
 		"api_user" : "",
-		"api_passwd" : "",
+		"api_passwd" : ""
 	},
 
 	// Setup logging

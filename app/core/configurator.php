@@ -40,8 +40,6 @@ class Configurator{
 
 				$extra_routes = array();
 
-				if(empty($content))
-
 				// Convert routes to the controllers with custom namespace for every core
 				foreach($content as $core){
 					if(!empty($core['routes'])){
