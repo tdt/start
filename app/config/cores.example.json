@@ -11,5 +11,19 @@
 		"routes" : null
 
 
+	},
+         // core core
+	"core" : {
+		// Namespace for this core
+		"namespace" : "tdt\\core",
+                    // Routes for this core
+                    // Example:
+                    // routes: { 
+		//"GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*" : "controllers\\RController",
+		 // "GET | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
+		  //"PUT | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
+		  //"GET | (?P<packageresourcestring>.*)" : "controllers\\RedirectController",
+		//  }
+		
 	}
 }
