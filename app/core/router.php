@@ -64,5 +64,5 @@ catch(Exception $e){
 	$log->logCrit($e->getMessage());
 	set_error_header(500,"Internal Server Error");
 	//add a javascript redirect to an error page
-	echo "<script>location = \"" . tdt\framework\Config::get("general","hostname") . tdt\framework\Config::get("general","subdir") . "error/critical/\";</script>";
+	echo "<script>location = \"" . Config::get("general","hostname") . Config::get("general","subdir") . "error/critical/\";</script>";
 }
