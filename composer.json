@@ -1,8 +1,19 @@
 {
-	"require" : {
-		"tdt/framework" : "dev-master",
-		"tdt/core"		: "dev-master"
-	},
+    "name": "tdt/start",
+    "description": "If you want to start working on The DataTank, start here! This is an installer, a config reader and a router.",
+    "homepage": "http://thedatatank.com",
+    "type": "library",
+    "license": "AGPLv3",
+    "suggest": {
+        "tdt/core": "RESTful API to configure several inputs to format using these formatters",
+        "tdt/input": "A streaming ETL with mapping function included. Depending on your configuration, you can extract files in different formats, transform then into PHP arrays, optionally map them to a vocabulary and load the arrays in a store"
+    },
 
-	"minimum-stability" : "dev"
+    "require" : {
+        "php": ">=5.3.0",
+        "tdt/framework" : "dev-master",
+        "tdt/core"      : "dev-master"
+    },
+
+    "minimum-stability" : "stable"
 }
