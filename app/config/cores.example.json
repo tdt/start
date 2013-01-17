@@ -19,7 +19,7 @@
         "routes" : null
         // Example:
         //  routes: {
-        //      "GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*" : "controllers\\RController",
+        //       "GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)" : "controllers\\RController",
         //      "GET | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
         //      "PUT | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
         //      "GET | (?P<packageresourcestring>.*)" : "controllers\\RedirectController",
