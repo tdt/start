@@ -11,8 +11,7 @@
 
     "require" : {
         "php": ">=5.3.0",
-        "tdt/framework" : "dev-master",
-        "tdt/core"      : "dev-master"
+        "tdt/core"      : "dev-development"
     },
 
     "minimum-stability" : "stable"
