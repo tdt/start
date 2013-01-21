@@ -1,6 +1,6 @@
 {
 	// Default error controller
-	"GET | error/(4..|5..|critical)/?.*" : "ErrorController",
+	"GET | /error/(4..|5..|critical)/?.*" : "ErrorController",
 
 	// Default documentation controller
 	"GET | /documentation/?" : "DocumentationController",
