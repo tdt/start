@@ -1,8 +1,8 @@
 <?php
 
-class DocumentationController extends tdt\framework\AController{
+class DocumentationController{
     public function GET($matches){
-    	$location = tdt\framework\Config::get("general", "hostname") . tdt\framework\Config::get("general", "subdir");
+    	$location = app\core\Config::get("general", "hostname") . app\core\Config::get("general", "subdir");
 
 		include(APPPATH . "template/header.php");
 		include(APPPATH . "template/documentation.php");
