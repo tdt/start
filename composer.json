@@ -14,5 +14,5 @@
         "tdt/core"      : "dev-master"
     },
 
-    "minimum-stability" : "stable"
+    "minimum-stability" : "dev"
 }

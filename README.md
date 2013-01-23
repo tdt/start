@@ -22,7 +22,7 @@ $ sudo mv composer.phar /usr/local/bin/composer
 If you have composer installed, you can get your copy of tdt/start by running:
 
 ``` bash
-$ composer create-project tdt/start
+$ composer create-project tdt/start -s dev
 ```
 
 (Alternatively you could clone the repository and run: `composer install` to get the dependencies)
