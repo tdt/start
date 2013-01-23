@@ -29,6 +29,10 @@ $ composer create-project tdt/start -s dev
 
 There are two folders in this repository: public/ and app/. Public contain all the publicly accessible files, such as html, javascript and css files. App contains all the bootstrap code which configures and initiates the right packages.
 
+### index.php
+
+Copy the example index.php file from public/index.example.php &rarr; public/index.php. Change environment setting if desired.
+
 ### Configuration
 
 Copy the config example files in app/config/ (e.g. app/config/general.example.json &rarr; app/config/general.json)
