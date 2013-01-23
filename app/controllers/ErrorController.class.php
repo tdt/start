@@ -2,8 +2,8 @@
 /**
  * Show a decent error message
  */
-class ErrorController extends \tdt\framework\AController {
-	public function GET($matches){
+class ErrorController {
+	public function GET($matches){         
 		try{
 			$errorcode = $matches[1];
 			$problem = "";

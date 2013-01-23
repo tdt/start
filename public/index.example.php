@@ -7,7 +7,7 @@
  */
 
 // Set the environment for error reporting
-define('ENVIRONMENT', 'development');
+define('ENVIRONMENT', 'production');
 
 /**
  * Alright, here we go!

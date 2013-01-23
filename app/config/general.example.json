@@ -43,6 +43,6 @@
 		"enabled" : true,
 
 		// Make sure you give write access to this or your visitors will end up in an endless loop.
-		"path" : "/var/log/"
+		"path" : "/tmp"
 	}
 }

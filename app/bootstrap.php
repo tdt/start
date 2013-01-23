@@ -1,4 +1,7 @@
 <?php
+
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 /**
  * 	     Booting...
  * [================>  ]
@@ -15,6 +18,9 @@ require_once VENDORPATH . "autoload.php";
 
 // Load the configurator
 require_once APPPATH . "core/configurator.php";
+
+// Load the configuration wrapper
+require_once APPPATH . "core/Config.php";
 
 // Load the error and documentation controllers
 require_once APPPATH . "controllers/ErrorController.class.php";
@@ -48,11 +54,7 @@ try{
 }
 
 // Pass on the configuration
-tdt\framework\Config::setConfig($config);
-
-
-// Get the logger instance
-$log = tdt\framework\Log::getInstance();
+app\core\Config::setConfig($config);
 
 // Start the router
 require_once APPPATH."core/router.php";
@@ -76,9 +78,9 @@ if (!function_exists("getallheaders" )){
 
 // Hacking the brains of other people using fault injection
 // http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html
-if(tdt\framework\Config::get("general", "faultinjection", "enabled")){
+if(app\core\Config::get("general", "faultinjection", "enabled")){
 	// Return a 503 Service Unavailable ~ each {period} requests and add Retry-After header
-	if(! rand(0, tdt\framework\Config::get("general", "faultinjection", "period") -1) ){
+	if(! rand(0, app\core\Config::get("general", "faultinjection", "period") -1) ){
 		set_error_header("503","Service Unavailable");
 		header("Retry-After: 0");
 		exit();
@@ -89,7 +91,7 @@ if(tdt\framework\Config::get("general", "faultinjection", "enabled")){
 set_error_handler("wrapper_handler");
 
 // Initialize the timezone
-date_default_timezone_set(tdt\framework\Config::get("general","timezone"));
+date_default_timezone_set(app\core\Config::get("general","timezone"));
 
 // TODO: add Tracker
 
@@ -105,8 +107,10 @@ function wrapper_handler($number, $string, $file, $line, $context){
 	global $log;
 
 	$error_message = $string . " on line " . $line . " in file ". $file . ".";
-	$log->logCrit($error_message);
-	echo "<script>location = \"" . tdt\framework\Config::get("general","hostname") . tdt\framework\Config::get("general","subdir") . "error/critical\";</script>";
+	$log = new Logger('bootstrap');
+         $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::ERROR));
+         $log->addError($error_message);
+	echo "<script>location = \"" . app\core\Config::get("general","hostname") . app\core\Config::get("general","subdir") . "error/critical\";</script>";
 	set_error_header(500,"Internal Server Error");
 	//No need to continue
 	exit(0);

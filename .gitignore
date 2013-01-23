@@ -4,6 +4,7 @@ app/config/*
 !app/config/cores.example.json
 !app/config/routes.json
 !app/config/README.md
+public/index.php
 
 Makefile
 *.DS_Store
