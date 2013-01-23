@@ -20,7 +20,7 @@ class Config{
     }
 
 
-    public static function get($category,$key="",$key2=""){
+    public static function get($category, $key="", $key2=""){
         if(self::$config === null){
             echo "Please set the config using app\core\Config::setConfig(\$array);";
             exit();
