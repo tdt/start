@@ -1,5 +1,7 @@
 # tdt/start
 
+[![Build Status](https://travis-ci.org/tdt/start.png?branch=development)](https://travis-ci.org/tdt/start)
+
 If you want to start working on The DataTank, start here! This is an installer, a config reader and a router. If you have an empty LAMP stack, this is the right way to go. If you already have a Symfony, Drupal, WordPress, Zend... system installed, you might want to look into the separate packages.
 
 ## Installation
