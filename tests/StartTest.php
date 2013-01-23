@@ -36,7 +36,4 @@ class StartTest extends \PHPUnit_Framework_TestCase{
         $this->assertEquals($config, Config::getConfigArray(), "Config array doesn't match");
         $this->assertEmpty(Config::get('general'), "Previous config is still in the array");
     }
-
-    public function testContent(){
-    }
 }
