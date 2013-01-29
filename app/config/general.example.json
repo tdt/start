@@ -11,6 +11,13 @@
 	"defaultlanguage" : "en",
 	"defaultformat" : "json",
 
+	// The full path to the apache access log file
+	"accesslogapache" : "/var/log/apache2/access.log",
+
+	// The format of the apache access log file,supported values are: common and combined
+	// If you don't know the format take a look at this link: http://httpd.apache.org/docs/2.2/logs.html
+	"apachelogformat" : "common",
+
 	// Setup caching
 	"cache" : {
 		// MemCache, NoCache or APC
