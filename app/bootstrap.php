@@ -56,10 +56,6 @@ try{
 // Pass on the configuration
 app\core\Config::setConfig($config);
 
-
-// Get the logger instance
-//$log = tdt\framework\Log::getInstance();
-
 // Start the router
 require_once APPPATH."core/router.php";
 
@@ -113,7 +109,7 @@ function wrapper_handler($number, $string, $file, $line, $context){
 	$error_message = $string . " on line " . $line . " in file ". $file . ".";
 	$log = new Logger('bootstrap');
          $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::ERROR));
-         $log->addError($error_message);   
+         $log->addError($error_message);
 	echo "<script>location = \"" . app\core\Config::get("general","hostname") . app\core\Config::get("general","subdir") . "error/critical\";</script>";
 	set_error_header(500,"Internal Server Error");
 	//No need to continue
