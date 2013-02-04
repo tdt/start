@@ -48,7 +48,8 @@ class Glue {
             $method = strtoupper($HTTPheaders["X-HTTP-Method-Override"]);
         }
 
-        $path = $_SERVER['REQUEST_URI'];
+        // Drop first slash
+        $path = preg_replace('/^\//', '', trim($_SERVER['REQUEST_URI']));
 
         $found = false;
 
@@ -57,10 +58,10 @@ class Glue {
         foreach ($urls as $regex => $class) {
             $classa = explode(".", $class);
             $class = $classa[0];
+            // Drop first slash of route
+            $regex = preg_replace('/^\//', '', trim($regex));
             $regex = str_replace('/', '\/', $regex);
             $regex = '^' . $regex . '\/?$';
-
-
 
 
             if (preg_match("/$regex/i", $path, $matches)) {

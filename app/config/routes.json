@@ -6,5 +6,5 @@
     "GET | /documentation/?" : "DocumentationController",
 
     // Start by showing documentation
-    "GET | /?" : "DocumentationController"
+    "GET | /" : "DocumentationController"
 }
