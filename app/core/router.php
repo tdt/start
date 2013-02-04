@@ -62,7 +62,7 @@ try {
     $log->addError($e->getMessage());
     set_error_header($e->getCode(), $e->getShort());
     echo "<script>location = \"" . $e->getURL() . "\";</script>";
-} catch (Exception $e) {    
+} catch (Exception $e) {
     $log = new Logger('router');
     $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::CRITICAL));
     $log->addCritical($e->getMessage());
