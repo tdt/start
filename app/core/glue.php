@@ -10,7 +10,7 @@
  *      * delimiter (/) are automatically escaped: (\/)
  *      * The beginning and end are anchored (^ $)
  *      * An optional end slash is added (/?)
- * 	    * The i option is added for case-insensitive searches
+ *      * The i option is added for case-insensitive searches
  *
  * Example:
  *
@@ -59,12 +59,12 @@ class Glue {
             $class = $classa[0];
             $regex = str_replace('/', '\/', $regex);
             $regex = '^' . $regex . '\/?$';
-            
-           
-          
-            
+
+
+
+
             if (preg_match("/$regex/i", $path, $matches)) {
-                $found = true;                               
+                $found = true;
                 if (class_exists($class)) {
                     $obj = new $class;
                     if (method_exists($obj, $method)) {

@@ -10,18 +10,18 @@ class StartTest extends \PHPUnit_Framework_TestCase{
         // Regular config
         $config = array(
             "general" => array(
-                    "hostname" => "http://localhost.be",
-                    "subdir" => "",
-                    "cache" => array(
-                            "system" => "MemCache",
-                            "port" => 50123
-                        )
+                "hostname" => "http://localhost.be",
+                "subdir" => "",
+                "cache" => array(
+                    "system" => "MemCache",
+                    "port" => 50123
+                    )
                 ),
             "db" => array(
                 "host" => "localhost",
                 "port" => 3366
-            )
-        );
+                )
+            );
 
         Config::setConfig($config);
         $this->assertEquals($config, Config::getConfigArray(), "Config array doesn't match");

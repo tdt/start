@@ -1,55 +1,55 @@
 {
-	// The machines hostname, add a trailing slash!
-	"hostname" : "http://localhost/",
+    // The machines hostname, add a trailing slash!
+    "hostname" : "http://localhost/",
 
-	// The webserver subdirectory, if it's not in a subdir, fill in blank. Just like $HOSTNAME, you must add a trailing slash!
-	"subdir" : "",
+    // The webserver subdirectory, if it's not in a subdir, fill in blank. Just like $HOSTNAME, you must add a trailing slash!
+    "subdir" : "",
 
-	// The timezone of this API, for both requests as responses
-	"timezone" : "Europe/Brussels",
+    // The timezone of this API, for both requests as responses
+    "timezone" : "Europe/Brussels",
 
-	"defaultlanguage" : "en",
-	"defaultformat" : "json",
+    "defaultlanguage" : "en",
+    "defaultformat" : "json",
 
-	// The full path to the apache access log file
-	"accesslogapache" : "/var/log/apache2/access.log",
+    // The full path to the apache access log file
+    "accesslogapache" : "/var/log/apache2/access.log",
 
-	// The format of the apache access log file,supported values are: common and combined
-	// If you don't know the format take a look at this link: http://httpd.apache.org/docs/2.2/logs.html
-	"apachelogformat" : "common",
+    // The format of the apache access log file,supported values are: common and combined
+    // If you don't know the format take a look at this link: http://httpd.apache.org/docs/2.2/logs.html
+    "apachelogformat" : "common",
 
-	// Setup caching
-	"cache" : {
-		// MemCache, NoCache or APC
-		"system" : "NoCache",
-		"host" : "localhost",
-		"port" : 11211
-	},
+    // Setup caching
+    "cache" : {
+        // MemCache, NoCache or APC
+        "system" : "NoCache",
+        "host" : "localhost",
+        "port" : 11211
+    },
 
-	// http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html
-	"faultinjection" : 	{
-		"enabled" : true,
+    // http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html
+    "faultinjection" :  {
+        "enabled" : true,
 
-		// Return a 503 each {period} requests
-		"period" : 1000
-	},
+        // Return a 503 each {period} requests
+        "period" : 1000
+    },
 
-	// When turned off, everyone can DELETE, POST or PUT resources at will.
-	// Not recommended if ran outside localhost
-	"auth" : {
-		"enabled" : true,
-		"api_user" : "",
-		"api_passwd" : ""
-	},
+    // When turned off, everyone can DELETE, POST or PUT resources at will.
+    // Not recommended if ran outside localhost
+    "auth" : {
+        "enabled" : true,
+        "api_user" : "",
+        "api_passwd" : ""
+    },
 
-	// Setup logging
-	"logging" : {
-		// Based on section 4.1.1 of http://www.faqs.org/rfcs/rfc3164.html
-		// Error severity, from low to high:
-		// EMERG, ALERT, CRIT, ERR, WARN, NOTICE, INFO, DEBUG
-		"enabled" : true,
+    // Setup logging
+    "logging" : {
+        // Based on section 4.1.1 of http://www.faqs.org/rfcs/rfc3164.html
+        // Error severity, from low to high:
+        // EMERG, ALERT, CRIT, ERR, WARN, NOTICE, INFO, DEBUG
+        "enabled" : true,
 
-		// Make sure you give write access to this or your visitors will end up in an endless loop.
-		"path" : "/tmp"
-	}
+        // Make sure you give write access to this or your visitors will end up in an endless loop.
+        "path" : "/tmp"
+    }
 }
