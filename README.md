@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # tdt/start
 
 [![Build Status](https://travis-ci.org/tdt/start.png)](https://travis-ci.org/tdt/start)

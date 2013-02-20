@@ -4,13 +4,13 @@
 <script>
 
 $(document).ready(function(){
-	$.ajax({
-		url : "<?php echo $location ?>README.md",
-		dataType: "text",
-		success : function (md) {
-			var converter = new Markdown.Converter();
-			$("#markdown").html(converter.makeHtml(md));
-		}
-	});
+    $.ajax({
+        url : "<?php echo $location ?>README.md",
+        dataType: "text",
+        success : function (md) {
+            var converter = new Markdown.Converter();
+            $("#markdown").html(converter.makeHtml(md));
+        }
+    });
 });
 </script>

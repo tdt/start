@@ -26,6 +26,7 @@
         //  "PATCH | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
         //  "GET | (?P<packageresourcestring>.*)" : "controllers\\RedirectController",
         //  "GET | spectql(?P<query>/.*)" : "controllers\\SPECTQLController"
+
         //  }
     }
 }
