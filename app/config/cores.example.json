@@ -19,10 +19,13 @@
         "routes" : null
         // Example:
         //  routes: {
-        //       "GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)" : "controllers\\RController",
-        //      "GET | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
-        //      "PUT | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
-        //      "GET | (?P<packageresourcestring>.*)" : "controllers\\RedirectController",
+        //  "GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)" : "controllers\\RController",
+        //  "GET | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
+        //  "PUT | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
+        //  "DELETE | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
+        //  "PATCH | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
+        //  "GET | (?P<packageresourcestring>.*)" : "controllers\\RedirectController",
+        //  "GET | spectql(?P<query>/.*)" : "controllers\\SPECTQLController"
         //  }
     }
 }
