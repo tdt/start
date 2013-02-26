@@ -9,7 +9,7 @@ If you want to start working on The DataTank, start here! This is an installer, 
 
 ### Composer
 
-Open a terminal, and install [composer](http://getcomposer.org/download/):
+In Unix, open a terminal, and install [composer](http://getcomposer.org/download/):
 
 ``` bash
 $ curl -s https://getcomposer.org/installer | php
@@ -17,6 +17,8 @@ $ curl -s https://getcomposer.org/installer | php
 # Move to your path
 $ sudo mv composer.phar /usr/local/bin/composer
 ```
+
+In Windows, follow the installation directions on the [composer download page](http://getcomposer.org/download/).
 
 ### Create-project
 
