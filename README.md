@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # tdt/start
 
 [![Build Status](https://travis-ci.org/tdt/start.png)](https://travis-ci.org/tdt/start)
@@ -52,8 +53,8 @@ Below we cover each of the configuration files and what their configuration para
 5. defaultformat - The default format in which queried data will be presented in if no format is specified with the request.
 6. accesslogapache - The absolute path to the apache log access file. This will be used to perform some statistical queries.
 7. cache - Contains three parameters to perform caching:
-	+ system - Choose from NoCache or MemCache. If you opt for MemCache, be sure that Memcaced is installed.
-	+ host - The host that the Caching system is running on. Note that if NoCache has been used, host and port don't really matter.
+	+ system - Choose from NoCache or MemCache. If you opt for MemCache, be sure that Memcached is installed.
+	+ host - The host that the caching system is running on. Note that if NoCache has been used, host and port don't really matter.
 	+ port - The port to which we have to connect in order to communicate with the caching system.
 8. auth - Authentication parameters:
 	+ enabled - true/false. Caveat lector, if this is put to false, anyone can delete or create data resources!

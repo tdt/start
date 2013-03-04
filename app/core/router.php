@@ -61,12 +61,11 @@ try {
     $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::ERROR));
     $log->addError($e->getMessage());
     set_error_header($e->getCode(), $e->getShort());
-    echo "<script>location = \"" . $e->getURL() . "\";</script>";
+    exit(0);
 } catch (Exception $e) {
     $log = new Logger('router');
     $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::CRITICAL));
     $log->addCritical($e->getMessage());
     set_error_header(500, "Internal Server Error");
-    //add a javascript redirect to an error page
-    echo "<script>location = \"" . app\core\Config::get("general", "hostname") . app\core\Config::get("general", "subdir") . "error/critical/\";</script>";
+    exit(0);
 }
