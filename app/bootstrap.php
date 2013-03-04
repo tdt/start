@@ -22,9 +22,10 @@ require_once APPPATH . "core/configurator.php";
 // Load the configuration wrapper
 require_once APPPATH . "core/Config.php";
 
-// Load the error and documentation controllers
+// Load the start controllers
 require_once APPPATH . "controllers/ErrorController.class.php";
 require_once APPPATH . "controllers/DocumentationController.class.php";
+require_once APPPATH . "controllers/RedirectController.class.php";
 
 $c = new ErrorController();
 
