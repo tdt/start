@@ -56,9 +56,6 @@ try{
 // Pass on the configuration
 app\core\Config::setConfig($config);
 
-// Start the router
-require_once APPPATH."core/router.php";
-
 // General getallheaders function
 if (!function_exists("getallheaders" )){
     function getallheaders(){
@@ -75,6 +72,8 @@ if (!function_exists("getallheaders" )){
     }
 }
 
+// Start the router
+require_once APPPATH."core/router.php";
 
 // Hacking the brains of other people using fault injection
 // http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html
