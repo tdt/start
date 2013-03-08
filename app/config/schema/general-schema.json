@@ -27,6 +27,14 @@
             "type" : "string",
             "required" : true
         },
+        "accesslogapache" : {
+            "type" : "string",
+            "required" : false
+        },
+        "apachelogformat" : {
+            "type" : "string",
+            "required" : false
+        },
         "cache" : {
             "type" : "object",
             "required" : true,
