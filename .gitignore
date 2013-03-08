@@ -1,4 +1,5 @@
 app/config/*
+!app/config/schema
 !app/config/general.example.json
 !app/config/db.example.json
 !app/config/cores.example.json

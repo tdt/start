@@ -61,7 +61,7 @@ class Configurator{
         return $config;
     }
 
-    protected static function stripComments($content){
+    public static function stripComments($content){
         $ret = preg_replace('/^(\s|\t)*\/\/.*$/m', "", $content);
         return trim($ret);
     }

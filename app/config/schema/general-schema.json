@@ -1,0 +1,97 @@
+{
+    "title" : "General configuration schema",
+    "$schema" : "http://json-schema.org/draft-04/schema#",
+    "description": "The configuration object schema validation for general configuration.",
+    "type" : "object",
+    "required" : true,
+    "properties":{
+        "hostname" : {
+            "type" : "string",
+            "pattern" : "^http(s?)://.*?/$",
+            "required" : true
+        },
+        "subdir" : {
+            "type" : "string",
+            "pattern" : "(^$)|(^.*?/$)",
+            "required" : true
+        },
+        "timezone" : {
+            "type" : "string",
+            "required" : true
+        },
+        "defaultlanguage" : {
+            "type" : "string",
+            "required" : true
+        },
+        "defaultformat" : {
+            "type" : "string",
+            "required" : true
+        },
+        "cache" : {
+            "type" : "object",
+            "required" : true,
+            "properties": {
+                "system": {
+                    "type" : "string",
+                    "enum" : ["MemCache", "NoCache"],
+                    "required" : true
+                },
+                "host" : {
+                    "type" : "string",
+                    "required" : false
+                },
+                "port" : {
+                    "type" : "number",
+                    "required" : false
+                }
+            }
+        },
+        "faultinjection" : {
+            "type" : "object",
+            "required" : true,
+            "properties": {
+                "enabled": {
+                    "type" : "boolean",
+                    "required" : true
+                },
+                "period" : {
+                    "type" : "number",
+                    "required" : false
+                }
+            }
+        },
+        "auth" : {
+            "type" : "object",
+            "required" : true,
+            "properties": {
+                "enabled": {
+                    "type" : "boolean",
+                    "required" : true
+                },
+                "api_user" : {
+                    "type" : "string",
+                    "required" : true
+                },
+                "api_passwd" : {
+                    "type" : "string",
+                    "required" : true
+                }
+            }
+        },
+        "logging" : {
+            "type" : "object",
+            "required" : true,
+            "properties": {
+                "enabled": {
+                    "type" : "boolean",
+                    "required" : true
+                },
+                "path" : {
+                    "type" : "string",
+                    "required" : true
+                }
+            }
+        }
+    },
+    "additionalProperties" : false
+}
