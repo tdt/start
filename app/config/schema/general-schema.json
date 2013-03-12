@@ -7,12 +7,10 @@
     "properties":{
         "hostname" : {
             "type" : "string",
-            "pattern" : "^http(s?)://.*?/$",
             "required" : true
         },
         "subdir" : {
             "type" : "string",
-            "pattern" : "(^$)|(^.*?/$)",
             "required" : true
         },
         "timezone" : {
