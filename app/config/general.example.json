@@ -20,7 +20,7 @@
 
     // Setup caching
     "cache" : {
-        // MemCache, NoCache or APC
+        // MemCache, NoCache
         "system" : "NoCache",
         "host" : "localhost",
         "port" : 11211

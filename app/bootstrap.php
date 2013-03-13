@@ -2,6 +2,8 @@
 
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use JsonSchema\Validator;
+
 /**
  *       Booting...
  * [================>  ]
@@ -22,9 +24,10 @@ require_once APPPATH . "core/configurator.php";
 // Load the configuration wrapper
 require_once APPPATH . "core/Config.php";
 
-// Load the error and documentation controllers
+// Load the start controllers
 require_once APPPATH . "controllers/ErrorController.class.php";
 require_once APPPATH . "controllers/DocumentationController.class.php";
+require_once APPPATH . "controllers/RedirectController.class.php";
 
 $c = new ErrorController();
 
@@ -36,11 +39,27 @@ $config_files = array(
     "cores"
     );
 
-// Check if all config files are present
+
+$config_validator = new Validator();
+// Check if all config files are present and validate them
 foreach($config_files as $file){
-    if(!file_exists(APPPATH. "config/". $file . ".json")){
-        echo "The file $file doesn't exist. Please check whether you have copied ". APPPATH ."config/$file.example.json to ". APPPATH ."config/$file.json.";
+    $filename = APPPATH. "config/". $file . ".json";
+    $schema = APPPATH. "config/schema/". $file . "-schema.json";
+
+    if(!file_exists($filename)){
+        echo "The file $file doesn't exist. Please check whether you have copied ". APPPATH ."config/$file.example.json to ".$filename;
         exit();
+    }elseif(file_exists($schema)){
+        // Validate config file if schema exists
+        $config_validator->check(json_decode(Configurator::stripComments(file_get_contents($filename))), json_decode(file_get_contents($schema)));
+
+        if (!$config_validator->isValid()) {
+            echo "JSON ($file.json) does not validate. Violations:\n";
+            foreach ($config_validator->getErrors() as $error) {
+                echo sprintf("[%s] %s\n",$error['property'], $error['message']);
+            }
+            exit();
+        }
     }
 }
 
@@ -55,9 +74,6 @@ try{
 
 // Pass on the configuration
 app\core\Config::setConfig($config);
-
-// Start the router
-require_once APPPATH."core/router.php";
 
 // General getallheaders function
 if (!function_exists("getallheaders" )){
@@ -75,6 +91,8 @@ if (!function_exists("getallheaders" )){
     }
 }
 
+// Start the router
+require_once APPPATH."core/router.php";
 
 // Hacking the brains of other people using fault injection
 // http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html

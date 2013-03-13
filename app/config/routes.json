@@ -6,5 +6,9 @@
     "GET | /documentation/?" : "DocumentationController",
 
     // Start by showing documentation
-    "GET | /" : "DocumentationController"
+    "GET | /" : "DocumentationController",
+
+    // You cannot get a real-world object, only its representation.
+    // Therefore we're going to redirect you to .about which will do content negotiation.
+    "GET | /(.(?!\\.[a-zA-Z]+(\\?.+)?))+" : "RedirectController"
 }

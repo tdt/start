@@ -1,0 +1,31 @@
+{
+    "title" : "Database configuration schema",
+    "$schema" : "http://json-schema.org/draft-04/schema#",
+    "description": "The configuration object schema validation for database configuration.",
+    "type" : "object",
+    "required" : true,
+    "properties":{
+        "system" : {
+            "type" : "string",
+            "enum" : ["mysql", "pgsql", "sqlite", "cubrid", "oracle"],
+            "required" : true
+        },
+        "host" : {
+            "type" : "string",
+            "required" : true
+        },
+        "name" : {
+            "type" : "string",
+            "required" : true
+        },
+        "user" : {
+            "type" : "string",
+            "required" : true
+        },
+        "password" : {
+            "type" : "string",
+            "required" : true
+        }
+    },
+    "additionalProperties" : false
+}
