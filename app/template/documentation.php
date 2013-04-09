@@ -1,16 +1,20 @@
-<div id="markdown"></div>
+<xmp id='markdown' theme="united"></xmp>
 
-<script src="<?php echo $location . "assets/js/Markdown.Converter.js" ; ?>"></script>
 <script>
+    // Modify strapdown originBase
+    var originBase = "<?php echo $location ?>assets/strapdown/";
 
-$(document).ready(function(){
-    $.ajax({
-        url : "<?php echo $location ?>README.md",
-        dataType: "text",
-        success : function (md) {
-            var converter = new Markdown.Converter();
-            $("#markdown").html(converter.makeHtml(md));
-        }
+    $(document).ready(function(){
+        $.ajax({
+            url : "<?php echo $location ?>README.md",
+            dataType: "text",
+            success : function (md) {
+                // Load markdown loader
+                $('#markdown').html(md);
+
+                // Load strapdown
+                $.getScript(originBase + 'strapdown.js');
+            }
+        });
     });
-});
 </script>
