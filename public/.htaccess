@@ -12,13 +12,22 @@ Options +FollowSymLinks
 AddDefaultCharset UTF-8
 
 <IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^.*$ index.php
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+    RewriteEngine On
+
+    # Custom homepage in different folder
+    # RewriteRule ^$ folder/index.php
+
+    # Custom page(s) in another directory
+    # RewriteCond %{REQUEST_FILENAME} !-f
+    # RewriteRule ^page/?.*$ pagefolder/index.php
+
+    # Datatank rewrites
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^.*$ index.php
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
 </IfModule>
 
 <Files ~ "\.(ini|sql)$">
-  order allow,deny
-  deny from all
+    order allow,deny
+    deny from all
 </Files>
