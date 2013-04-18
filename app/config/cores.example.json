@@ -1,31 +1,29 @@
 {
-    // Input core
-    "input" : {
-        // Namespace for this core
-        "namespace" : "tdt\\input",
-        // Routes for this core
-        "routes" : null
-        // Example
-        //  routes: {
-        //      "GET | example/?" : "ExampleController"
-        //  }
-    },
-
     // Core core
     "core" : {
         // Namespace for this core
         "namespace" : "tdt\\core",
         // Routes for this core
-        "routes" : null
-        // Example:
-        //  routes: {
-        //  "GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)" : "controllers\\RController",
-        //  "GET | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
-        //  "PUT | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
-        //  "DELETE | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
-        //  "PATCH | TDTAdmin/Resources/(?P<packageresourcestring>.*)" : "controllers\\CUDController",
-        //  "GET | spectql(?P<query>/.*)" : "controllers\\SPECTQLController"
-
-        //  }
+        "routes": {
+          "GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)" : "controllers\\RController",
+          "GET | TDTAdmin/Resources/(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
+          "PUT | TDTAdmin/Resources/(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
+          "DELETE | TDTAdmin/Resources/(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
+          "PATCH | TDTAdmin/Resources/(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
+          "GET | spectql(?P<query>/.*)" : "controllers\\SPECTQLController"
+        }
+    },
+    // Input core
+    "input" : {
+        "namespace" : "tdt\\input",
+        "routes" : {
+            "GET | TDTInput/Worker/? | @worker" : "scheduler\\controllers\\Worker",
+            "GET | TDTInput/?(?P<format>\\.[a-zA-Z]+)? | @jobadmin" : "scheduler\\controllers\\InputResourceController",
+            "GET | TDTInput/(?P<resource>.*)\\.(?P<format>[a-zA-Z]+) | @jobadmin" : "scheduler\\controllers\\InputResourceController",
+            "GET | TDTInput/(?P<resource>.*?)(?P<test>/test)? | @jobadmin" : "scheduler\\controllers\\InputResourceController",
+            "PUT | TDTInput/(?P<resource>.*) | @jobadmin" : "scheduler\\controllers\\InputResourceController",
+            "POST | TDTInput/? | @jobadmin" : "scheduler\\controllers\\InputResourceController",
+            "DELETE | TDTInput/(?P<resource>.*) | @jobadmin" : "scheduler\\controllers\\InputResourceController"
+        }
     }
 }
