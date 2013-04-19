@@ -4,11 +4,15 @@ Dear visitor, welcome to the index page of The DataTank. You are seeing this pag
 
 ## Retrieve data
 
+### Introduction
+
 The DataTank publishes data to the web, this means that the data stored in files such as CSV and XLS files, are now accessible through the web. Furthermore, data in various data-structures such as databases and SHP files are accessible in the same way! This data can be retrieved via a simple GET HTTP request to the uri on which the data is published.
 
 This brings us to our first pointer and answer to the question: "What datasources are available and what data do they contain?". In order to answer this question we'll first explain how datatank uri's are built. A datatank uri is built by a series of identifiers and just like any other uri, the identifiers are split with a forward slash. These identifiers identify either a package or a resource. These terms are very simple, a package is a collection of other packages and/or resources and a resource represents a datasource.
 
-By example, we'll provide a usage of these new terms and provide a link to the overview of the published datasources.
+### Example
+
+To illustrate how the datatank works, we'll use the before mentioned terms and provide a link to the overview of the published datasources.
 Let's assume that a datatank is installed at localhost/datatank. If I were to browse to http://localhost/datatank, the page you are reading right now would be displayed. In order to get an overview of the published datasources you'll have to browse to the resource _resources_ located in the package _tdtinfo_ (e.g. http://localhost/datatank/tdtinfo/resources). This will provide you with not only an overview of the published datasources, but also in what package they are located, and some additional documentation about what information the data holds.
 
 Note that the tdtinfo/resources-resource is a resource like any other, this means that when you see a resource in the overview that interests you, simple put the package-name and the resource-name together and put after the uri on which the datatank is installed. A piece of a possible overview is given below:
