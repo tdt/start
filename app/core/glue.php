@@ -67,11 +67,17 @@ class Glue {
             $classa = explode(".", $class);
             $class = $classa[0];
 
-            // Check for a required user
-            preg_match("/\|\s*@([^\s]+)\s*$/i", $regex, $user);
-            $user = (isset($user[1]))? $user[1] : null;
+            // Check for a required user(s)
+            preg_match("/\|\s*((?:@[^\s]+?(?:\s*,\s*)?)*)\s*$/i", $regex, $user_string);
+            if(isset($user_string[1])){
+                preg_match_all("/@([^\s,]+)/i", $user_string[1], $users);
+                $users = $users[1];
+            }else{
+                $users = null;
+            }
+
             // Filter user from route
-            $regex = preg_replace("/\|\s*@([^\s]+)\s*$/i", "", $regex);
+            $regex = preg_replace("/\|\s*((?:@[^\s]+?(?:\s*,\s*)?)*)\s*$/i", "", $regex);
 
 
             // Drop first slash of route
@@ -83,20 +89,38 @@ class Glue {
             if (preg_match("/$regex/i", $path, $matches)) {
                 $found = true;
                 if (class_exists($class)) {
-                    if($user){
+                    if($users){
                         // Requires authentication
-                        if($userconf = Config::get("auth", $user)){
-                            $classname = "app\\auth\\" . $userconf['type'];
-                            $auth = new $classname();
+                        $match_autenticated = false;
 
-                            if(!$auth->isAuthenticated($user)){
-                                $auth->authenticate();
-                                exit();
+                        $auth = null;
+
+                        // Loop through allowed users, check if one is already authenticated
+                        foreach($users as $user){
+                            if($userconf = Config::get("auth", $user)){
+                                $classname = "app\\auth\\" . $userconf['type'];
+
+                                // Check if all users use the same authentication scheme
+                                if($auth != null && !($auth instanceof $classname)){
+                                    // Users need same auth scheme for one route
+                                    // TODO: show better error here
+                                    throw new TDTException(551, array($path, $method), $exception_config);
+                                    break;
+                                }else if($auth == null){
+                                    $auth = new $classname();
+                                }
+
+                                // Check authentication for this user
+                                if($auth->isAuthenticated($user)){
+                                    $match_autenticated = true;
+                                }
                             }
-                        }else{
-                            // User not found
-                            // TODO: needs better error message
-                            throw new TDTException(403, array($path, $method), $exception_config);
+                        }
+
+                        // None matched => authenticate
+                        if(!$match_autenticated){
+                            $auth->authenticate();
+                            exit();
                         }
                     }
 
