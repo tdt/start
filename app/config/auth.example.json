@@ -1,0 +1,17 @@
+{
+    "tdtadmin" : {
+        "documentation" : "This user can change the configuration of the publishing API",
+        "type" : "BasicAuth",
+        "password" : "..."
+    },
+    "worker":{
+        "documentation" : "Worker is a username for the cronjob that should load the worker from time to time",
+        "type":"BasicAuth",
+        "password":"..."
+    },
+    "jobadmin":{
+        "documentation" : "The jobadmin is a user that can create new, or delete EML jobs",
+        "type":"BasicAuth",
+        "password":"..."
+    }
+}

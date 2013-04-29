@@ -1,0 +1,27 @@
+{
+    "title" : "Authentication configuration schema",
+    "$schema" : "http://json-schema.org/draft-04/schema#",
+    "description": "The configuration object schema validation for authentication configuration.",
+    "type" : "object",
+    "required" : true,
+    "patternProperties": {
+        "^(.*)$": {
+            "type" : "object",
+            "properties": {
+                "documentation": {
+                    "type" : "string",
+                    "required" : false
+                },
+                "type" : {
+                    "type" : "string",
+                    "enum" : ["BasicAuth"],
+                    "required" : true
+                },
+                "password" : {
+                    "type" : "string",
+                    "required" : true
+                }
+            }
+        }
+    }
+}

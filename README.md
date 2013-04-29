@@ -10,7 +10,8 @@ If you want to start working on The DataTank, start here! This is an installer, 
 
 ### Composer
 
-We use composer to install all The Datatank's dependencies.
+We use composer to install all The Datatank's dependencies. Composer is a PHP package manager and installs necessary dependencies for you, instead of having to download those dependencies yourself. These dependencies are described in the composer.json file along with some additional meta-data. For more information about composer, check out their project website.
+
 Open a terminal, and install [composer](http://getcomposer.org/download/):
 
 ``` bash
@@ -69,11 +70,7 @@ Below we cover each of the configuration files and what their configuration para
     + system - Choose from NoCache or MemCache. If you opt for MemCache, be sure that Memcached is installed.
     + host - The host that the caching system is running on. Note that if NoCache has been used, host and port don't really matter.
     + port - The port to which we have to connect in order to communicate with the caching system.
-8. auth - Authentication parameters:
-    + enabled - true/false. Caveat lector, if this is put to false, anyone can delete or create data resources!
-    + api_user - The username that is allowed to perform admin actions.
-    + api_passwd - The password for the api_user.
-9. logging - Contains parameters to log actions that happen within the software:
+8. logging - Contains parameters to log actions that happen within the software:
     + enabled - true/false.
     + path - The absolute path to a directory where we can put the logging files. Make sure PHP has write access to this directory!
 
@@ -90,6 +87,21 @@ Below we cover each of the configuration files and what their configuration para
 This file will contain the regular expressions that will route an HTTP-request to the correct destination.
 Uncomment the routes in the _core_ entry of the json file, and that should get you going.
 
+#### auth.json
+
+This file will contains your user(s) for the autheticated parts of The DataTank. Username and password are required.
+These users are used in combination with routes, serveral routes in the example cores file require the user `tdtadmin` for example, but here are some more:
+
+#####Example routes
+
+```javascript
+// Normal route
+"HTTP_METHOD | URI" : "CONTROLLER"
+// Single user
+"HTTP_METHOD | URI | @username" : "CONTROLLER"
+// Multiple users
+"HTTP_METHOD | URI | @username, @user2, @user3" : "CONTROLLER"
+```
 
 ### Virtual host
 
