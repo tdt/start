@@ -10,6 +10,7 @@
           "PUT | TDTAdmin/Resources/(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
           "DELETE | TDTAdmin/Resources/(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
           "PATCH | TDTAdmin/Resources/(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
+          "GET | spectql(?P<query>/TDTAdmin/.*) | @tdtadmin" : "controllers\\SPECTQLController",
           "GET | spectql(?P<query>/.*)" : "controllers\\SPECTQLController"
         }
     },

@@ -119,7 +119,12 @@ class Glue {
 
                         // None matched => authenticate
                         if(!$match_autenticated){
-                            $auth->authenticate();
+                            if($auth){
+                                $auth->authenticate();
+                            }else{
+                                // Specified unexisting user as only authentication options
+                                throw new TDTException(551, array($class),$exception_config);
+                            }
                             exit();
                         }
                     }
