@@ -68,24 +68,6 @@
                 }
             }
         },
-        "auth" : {
-            "type" : "object",
-            "required" : true,
-            "properties": {
-                "enabled": {
-                    "type" : "boolean",
-                    "required" : true
-                },
-                "api_user" : {
-                    "type" : "string",
-                    "required" : true
-                },
-                "api_passwd" : {
-                    "type" : "string",
-                    "required" : true
-                }
-            }
-        },
         "logging" : {
             "type" : "object",
             "required" : true,

@@ -28,6 +28,9 @@
  * Glue::stick($urls);
  *
  */
+use app\core\Config;
+use tdt\exceptions\TDTException;
+
 class Glue {
 
     /**
@@ -55,9 +58,28 @@ class Glue {
 
         krsort($urls);
 
+        // Logger configuration
+        $exception_config = array();
+        $exception_config["log_dir"] = Config::get("general", "logging", "path");
+        $exception_config["url"] = Config::get("general", "hostname") . Config::get("general", "subdir") . "error";
+
         foreach ($urls as $regex => $class) {
             $classa = explode(".", $class);
             $class = $classa[0];
+
+            // Check for a required user(s)
+            preg_match("/\|\s*((?:@[^\s]+?(?:\s*,\s*)?)*)\s*$/i", $regex, $user_string);
+            if(isset($user_string[1])){
+                preg_match_all("/@([^\s,]+)/i", $user_string[1], $users);
+                $users = $users[1];
+            }else{
+                $users = null;
+            }
+
+            // Filter user from route
+            $regex = preg_replace("/\|\s*((?:@[^\s]+?(?:\s*,\s*)?)*)\s*$/i", "", $regex);
+
+
             // Drop first slash of route
             $regex = preg_replace('/^\//', '', trim($regex));
             $regex = str_replace('/', '\/', $regex);
@@ -67,29 +89,60 @@ class Glue {
             if (preg_match("/$regex/i", $path, $matches)) {
                 $found = true;
                 if (class_exists($class)) {
+                    if($users){
+                        // Requires authentication
+                        $match_autenticated = false;
+
+                        $auth = null;
+
+                        // Loop through allowed users, check if one is already authenticated
+                        foreach($users as $user){
+                            if($userconf = Config::get("auth", $user)){
+                                $classname = "app\\auth\\" . $userconf['type'];
+
+                                // Check if all users use the same authentication scheme
+                                if($auth != null && !($auth instanceof $classname)){
+                                    // Users need same auth scheme for one route
+                                    // TODO: show better error here
+                                    throw new TDTException(551, array($path, $method), $exception_config);
+                                    break;
+                                }else if($auth == null){
+                                    $auth = new $classname();
+                                }
+
+                                // Check authentication for this user
+                                if($auth->isAuthenticated($user)){
+                                    $match_autenticated = true;
+                                }
+                            }
+                        }
+
+                        // None matched => authenticate
+                        if(!$match_autenticated){
+                            if($auth){
+                                $auth->authenticate();
+                            }else{
+                                // Specified unexisting user as only authentication options
+                                throw new TDTException(551, array($class),$exception_config);
+                            }
+                            exit();
+                        }
+                    }
+
                     $obj = new $class;
                     if (method_exists($obj, $method)) {
                         $obj->$method($matches);
                     } else {
-                        $exception_config = array();
-                        $exception_config["log_dir"] = app\core\Config::get("general", "logging", "path");
-                        $exception_config["url"] = app\core\Config::get("general", "hostname") . app\core\Config::get("general", "subdir") . "error";
-                        throw new tdt\exceptions\TDTException(450, array($path, $method), $exception_config);
+                        throw new TDTException(450, array($path, $method), $exception_config);
                     }
                 } else {
-                    $exception_config = array();
-                    $exception_config["log_dir"] = app\core\Config::get("general", "logging", "path");
-                    $exception_config["url"] = app\core\Config::get("general", "hostname") . app\core\Config::get("general", "subdir") . "error";
-                    throw new tdt\exceptions\TDTException(551, array($class),$exception_config);
+                    throw new TDTException(551, array($class),$exception_config);
                 }
                 break;
             }
         }
         if (!$found) {
-            $exception_config = array();
-            $exception_config["log_dir"] = app\core\Config::get("general", "logging", "path");
-            $exception_config["url"] = app\core\Config::get("general", "hostname") . app\core\Config::get("general", "subdir") . "error";
-            throw new tdt\exceptions\TDTException(404, array($path),$exception_config);
+            throw new TDTException(404, array($path),$exception_config);
         }
     }
 

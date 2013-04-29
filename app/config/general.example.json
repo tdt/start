@@ -34,14 +34,6 @@
         "period" : 1000
     },
 
-    // When turned off, everyone can DELETE, POST or PUT resources at will.
-    // Not recommended if ran outside localhost
-    "auth" : {
-        "enabled" : true,
-        "api_user" : "",
-        "api_passwd" : ""
-    },
-
     // Setup logging
     "logging" : {
         // Based on section 4.1.1 of http://www.faqs.org/rfcs/rfc3164.html
