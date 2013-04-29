@@ -4,8 +4,24 @@
     "description": "The configuration object schema validation for authentication configuration.",
     "type" : "object",
     "required" : true,
-    "properties":{
-        
-    },
-    "additionalProperties" : true
+    "patternProperties": {
+        "^(.*)$": {
+            "type" : "object",
+            "properties": {
+                "documentation": {
+                    "type" : "string",
+                    "required" : false
+                },
+                "type" : {
+                    "type" : "string",
+                    "enum" : ["BasicAuth"],
+                    "required" : true
+                },
+                "password" : {
+                    "type" : "string",
+                    "required" : true
+                }
+            }
+        }
+    }
 }

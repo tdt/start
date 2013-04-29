@@ -29,6 +29,10 @@ require_once APPPATH . "controllers/ErrorController.class.php";
 require_once APPPATH . "controllers/DocumentationController.class.php";
 require_once APPPATH . "controllers/RedirectController.class.php";
 
+// Load auth classes
+require_once APPPATH . "auth/Auth.php";
+require_once APPPATH . "auth/BasicAuth.php";
+
 $c = new ErrorController();
 
 // Keep cores as the last item
@@ -36,8 +40,9 @@ $config_files = array(
     "general",
     "routes",
     "db",
-    "cores"
-    );
+    "cores",
+    "auth"
+);
 
 
 $config_validator = new Validator();
