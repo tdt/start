@@ -1,11 +1,4 @@
 {
-    // Default error controller
-    "GET | /error/(4..|5..|critical)/?.*" : "ErrorController",
-
-    // Default documentation controller
-    "GET | /documentation/?" : "DocumentationController",
-
-    // Start by showing documentation
     "GET | /" : "DocumentationController",
 
     // You cannot get a real-world object, only its representation.
