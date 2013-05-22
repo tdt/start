@@ -6,6 +6,7 @@ app/config/*
 !app/config/routes.json
 !app/config/README.md
 public/index.php
+public/tmp
 
 Makefile
 *.DS_Store
