@@ -10,10 +10,13 @@
             dataType: "text",
             success : function (md) {
                 // Load markdown loader
-                $('#markdown').html(md);
+                $('#markdown').hide().html(md);
 
                 // Load strapdown
-                $.getScript(originBase + 'strapdown.js');
+                $.getScript(originBase + 'strapdown.js', function(){
+                    // Loaded strapdown
+                    $('#markdown').show();
+                });
             }
         });
     });
