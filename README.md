@@ -149,3 +149,16 @@ Rewrites are done by the included .htaccess file
     # Other directives here
 </VirtualHost>
 ```
+
+
+## Updating tdt/start
+
+Updating tdt/start isn't something you can do with composer (for now). However you can still upgrade by pulling the latest version with GIT:
+
+``` bash
+
+git init
+git remote add origin https://github.com/tdt/start.git
+git pull
+
+```
