@@ -14,7 +14,7 @@
                 },
                 "method" : {
                     "type" : "string",
-                    "pattern" : "(GET|POST|DELETE)",
+                    "pattern" : "(GET|POST|DELETE|PATCH|PUT)",
                     "required" : true
                 },
                 "route" : {
