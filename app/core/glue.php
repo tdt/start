@@ -36,7 +36,7 @@ class Glue {
     /**
      * stick
      *
-     * the main static function of the glue class.
+     * The main static function of the glue class.
      *
      * @param   array    	$urls  	    The regex-based url to class mapping
      * @throws  Exception               Thrown if corresponding class is not found
@@ -54,37 +54,41 @@ class Glue {
         // Drop first slash
         $path = preg_replace('/^\//', '', trim($_SERVER['REQUEST_URI']));
 
+        //Compare two route objects (as defined in cores.json), based on their route regex, in reverse order.
+        function routecompare($object1, $object2) {
+            $compvalue = strcmp($object1['route'],$object2['route']);
+            if ($compvalue == 0) {
+                return 0;
+            }
+            else{
+                //Reverse the order of the sort
+                return -$compvalue;
+            }
+        }
+
         $found = false;
 
-        krsort($urls);
-
+        usort($urls,"routecompare");
+        
         // Logger configuration
         $exception_config = array();
         $exception_config["log_dir"] = Config::get("general", "logging", "path");
         $exception_config["url"] = Config::get("general", "hostname") . Config::get("general", "subdir") . "error";
 
-        foreach ($urls as $regex => $class) {
-            $classa = explode(".", $class);
+        foreach ($urls as $url) {
+            $classa = explode(".", $url['controller']);
             $class = $classa[0];
 
             // Check for a required user(s)
-            preg_match("/\|\s*((?:@[^\s]+?(?:\s*,\s*)?)*)\s*$/i", $regex, $user_string);
-            if(isset($user_string[1])){
-                preg_match_all("/@([^\s,]+)/i", $user_string[1], $users);
-                $users = $users[1];
-            }else{
+            $users = $url['users'];
+            if (empty($users)){
                 $users = null;
             }
 
-            // Filter user from route
-            $regex = preg_replace("/\|\s*((?:@[^\s]+?(?:\s*,\s*)?)*)\s*$/i", "", $regex);
-
-
             // Drop first slash of route
-            $regex = preg_replace('/^\//', '', trim($regex));
+            $regex = preg_replace('/^\//', '', trim($url['route']));
             $regex = str_replace('/', '\/', $regex);
             $regex = '^' . $regex . '\/?$';
-
 
             if (preg_match("/$regex/i", $path, $matches)) {
                 $found = true;
@@ -94,7 +98,6 @@ class Glue {
                         $match_autenticated = false;
 
                         $auth = null;
-
                         // Loop through allowed users, check if one is already authenticated
                         foreach($users as $user){
                             if($userconf = Config::get("auth", $user)){
