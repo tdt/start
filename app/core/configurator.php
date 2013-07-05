@@ -43,7 +43,7 @@ class Configurator{
                 // Convert routes to the controllers with custom namespace for every core
                 foreach($content as $core){
                     if(!empty($core['routes'])){
-                        //Loop all routes for a specific core
+                        // Loop all routes for a specific core
                         foreach($core['routes'] as $route => $controller){
                             if(!empty($core['namespace']))
                                 $controller = $core['namespace']."\\".$controller;
