@@ -46,13 +46,9 @@ foreach ($allroutes as $key => $route){
     }
 }
 
-$routes = array();
-
-//$log->logInfo("The routes we are working with", $routes);
-
 try {
     // This function will do the magic.
-    Glue::stick($routes);
+    Glue::stick($allroutes);
 } catch (tdt\exceptions\TDTException $e) {
     $log = new Logger('router');
     $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::ERROR));
