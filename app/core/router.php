@@ -40,17 +40,13 @@ $allroutes = app\core\Config::get("routes");
 
 
 // Only keep the routes that use the requested HTTP method
-$unsetkeys = preg_grep("/^" . strtoupper($_SERVER['REQUEST_METHOD']) . "/", array_keys($allroutes), PREG_GREP_INVERT);
-foreach ($unsetkeys as $key) {
-    unset($allroutes[$key]);
+foreach ($allroutes as $key => $route){
+    if (strcmp($route['method'],strtoupper($_SERVER['REQUEST_METHOD'])) != 0){
+        unset($allroutes[$key]);
+    }
 }
 
 $routes = array();
-// Drop the HTTP method from the route
-foreach ($allroutes as $route => $controller) {
-    $route = preg_replace('/^' . strtoupper($_SERVER['REQUEST_METHOD']) . '(\s|\t)*\|(\s|\t)*/', "", trim($route));
-    $routes[trim($route)] = trim($controller);
-}
 
 //$log->logInfo("The routes we are working with", $routes);
 
