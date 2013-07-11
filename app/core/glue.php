@@ -125,8 +125,8 @@ class Glue {
                             if($auth){
                                 $auth->authenticate();
                             }else{
-                                // Specified unexisting user as only authentication options
-                                throw new TDTException(551, array($class),$exception_config);
+                                // Specified unexisting user as only authentication option
+                                throw new TDTException(454, array($url['method'].' '.$url['route']) ,$exception_config);
                             }
                             exit();
                         }
