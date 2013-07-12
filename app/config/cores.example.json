@@ -144,7 +144,7 @@
         // Routes for this core
         "routes": [
             {
-                "documentation" : "The page with resources",
+                "documentation" : "General path for all GET requests to The Datank UI",
                 "method" : "GET",
                 "route" : ".*ui.*",
                 "controller" : "controllers\\UiResourceController",
@@ -153,7 +153,7 @@
                 ]
             },
             {
-                "documentation" : "The page with resources",
+                "documentation" : "General path for all POST requests to The Datank UI",
                 "method" : "POST",
                 "route" : ".*ui.*",
                 "controller" : "controllers\\UiResourceController",
