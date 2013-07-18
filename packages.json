@@ -1,0 +1,10 @@
+{
+    "package": {
+    	"name": "tdt/start",
+        "source": {
+          "url": "https://github.com/oSoc13/tdt-start.git",
+          "type": "git",
+          "reference": "master"
+        }
+    }
+}
