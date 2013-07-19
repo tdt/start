@@ -180,5 +180,31 @@
                 ]
             }
         ]
+    },
+    // UI core
+    "ui" : {
+        // Namespace for this core
+        "namespace" : "tdt\\ui",
+        // Routes for this core
+        "routes": [
+            {
+                "documentation" : "General path for all GET requests to The Datank UI",
+                "method" : "GET",
+                "route" : "^ui.*",
+                "controller" : "controllers\\UiResourceController",
+                "users" : [
+                    "tdtuiadmin"                
+                ]
+            },
+            {
+                "documentation" : "General path for all POST requests to The Datank UI",
+                "method" : "POST",
+                "route" : "^ui.*",
+                "controller" : "controllers\\UiResourceController",
+                "users" : [
+                    "tdtuiadmin"                
+                ]
+            }
+        ]
     }
 }
