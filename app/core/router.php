@@ -57,24 +57,31 @@ foreach ($allroutes as $route => $controller) {
 try {
     // This function will do the magic.
     Glue::stick($routes);
-} catch (tdt\exceptions\TDTException $e) {
+} catch (Exception $e) {
+
+    // Instantiate a Logger
     $log = new Logger('router');
     $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::ERROR));
-    $log->addError($e->getMessage());
-    set_error_header($e->getCode(), $e->getShort());
+
+    // Generator to generate an error page
     $generator = new Generator();
     $generator->setTitle("The DataTank");
-    if($e->getCode() < 500){
-        $generator->generate("<h1>Sorry, but there seems to be something wrong with the call you've made</h1><h2>". $e->getCode() ." - " . $e->getShort() . "</h2><p>" . $e->getMessage()  . "</p>");
+
+    if($e instanceof tdt\exceptions\TDTException){
+        // DataTank error
+        $log->addError($e->getMessage());
+        set_error_header($e->getCode(), $e->getShort());
+        if($e->getCode() < 500){
+            $generator->error($e->getCode(), "Sorry, but there seems to be something wrong with the call you've made", $e->getMessage());
+        }else{
+            $generator->error($e->getCode(), "Sorry, there seems to be something wrong with our servers", "If you're the system administrator, please check the logs. Otherwise, check back in a short while.");
+        }
     }else{
-        $generator->generate("<h1>Sorry, there seems to be something wrong with our servers</h1><p>If you're the system administrator, please check the logs. Otherwise, check back in a short while.</p>");
+        // General error
+        $log->addCritical($e->getMessage());
+        set_error_header(500, "Internal Server Error");
+        $generator->error($e->getCode(), "Sorry, there seems to be something wrong with our servers", "If you're the system administrator, please check the logs. Otherwise, check back in a short while.");
     }
-    exit(0);
-} catch (Exception $e) {
-    $log = new Logger('router');
-    $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::CRITICAL));
-    $log->addCritical($e->getMessage());
-    set_error_header(500, "Internal Server Error");
-    $generator->generate("<h1>Sorry, there seems to be something wrong with our servers</h1><p>If you're the system administrator, please check the logs. Otherwise, check back in a short while.</p>");
+
     exit(0);
 }

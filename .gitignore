@@ -7,6 +7,7 @@ app/config/*
 !app/config/README.md
 public/index.php
 public/tmp
+public/packages
 
 Makefile
 *.DS_Store
