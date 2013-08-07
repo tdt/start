@@ -12,8 +12,23 @@
     "require" : {
         "php": ">=5.3.0",
         "justinrainbow/json-schema": "1.3.1",
-        "tdt/core"      : "dev-master",
+        "tdt/core"      : "v0.1.3",
         "tdt/pages"      : "dev-master"
+    },
+
+    "autoload": {
+        "psr-0": {
+            "app" : ""
+        }
+    },
+
+    "scripts": {
+        "post-package-install": [
+            "app\\scripts\\Composer::postPackageInstall"
+        ],
+        "post-package-update": [
+            "app\\scripts\\Composer::postPackageUpdate"
+        ]
     },
 
     "minimum-stability" : "dev"
