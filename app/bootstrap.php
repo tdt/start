@@ -79,7 +79,10 @@ try{
     exit();
 }
 
+//TODO: handle authentication over here
+
 // Pass on the configuration
+
 app\core\Config::setConfig($config);
 
 // Initialize the timezone
@@ -111,8 +114,12 @@ if (!empty($subdir)) {
     }
 }
 
+//unset authentication: the router doesn't have to know anything about the authentication mechanism. This is tdt/start's problem.
+unset($config["auth"]);
+
 // Start the engines
 $core = new tdt\core\Router($config);
+$core->run();
 
 // Hacking the brains of other people using fault injection
 // http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html
