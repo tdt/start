@@ -1,9 +1,0 @@
-{
-    "title" : "Cores configuration schema",
-    "$schema" : "http://json-schema.org/draft-04/schema#",
-    "description": "The configuration object schema validation for cores configuration.",
-    "type" : "object",
-    "required" : true,
-    "properties":{
-    }
-}

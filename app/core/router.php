@@ -16,25 +16,6 @@ use tdt\pages\Generator;
  */
 require_once APPPATH . "core/glue.php";
 
-
-// Support for CGI/FastCGI
-if (!isset($_SERVER["REQUEST_URI"])) {
-    $_SERVER["REQUEST_URI"] = substr($_SERVER["PHP_SELF"], 1);
-    if (isset($_SERVER["QUERY_STRING"])) {
-        $_SERVER["REQUEST_URI"] .= "?" . $_SERVER["QUERY_STRING"];
-    }
-}
-
-// Drop subdir from the request
-$subdir = app\core\Config::get("general", "subdir");
-if (!empty($subdir)) {
-    try {
-        $_SERVER["REQUEST_URI"] = preg_replace("/^\/?" . str_replace('/', '\/', $subdir) . "/", "", $_SERVER["REQUEST_URI"]);
-    } catch (Exception $e) {
-        // Couldn't convert subdir to a regular expression
-    }
-}
-
 // Fetch the routes from the config
 $allroutes = app\core\Config::get("routes");
 

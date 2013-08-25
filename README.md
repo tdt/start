@@ -2,9 +2,10 @@
 
 [![Build Status](https://travis-ci.org/tdt/start.png)](https://travis-ci.org/tdt/start)
 
-If you want to start working on The DataTank, start here! This is an installer, a config reader and a router. If you have an empty LAMP stack, this is the right way to go. If you already have a Symfony, Drupal, WordPress, Zend... system installed, you might want to look into the separate packages.
+This is the right place to instal a The DataTank instance.
 
-- - -
+The source code of this repository makes sure you all packages are given the right configuration. When installing, this makes sure everything is installed in the right place.
+
 
 ## Installation
 
@@ -19,6 +20,10 @@ $ curl -s https://getcomposer.org/installer | php
 
 # Move composer to a directory in your $PATH (for easy access)
 $ sudo mv composer.phar /usr/local/bin/composer
+# Or if you cannot use root
+$ mkdir ~/bin
+$ mv composer.phar ~/bin/composer
+$ echo 'PATH=$PATH:$HOME/bin' >> ~/.bashrc
 ```
 
 ### Create-project
@@ -29,7 +34,7 @@ If you have composer installed, you can get your copy of tdt/start by running:
 $ composer create-project tdt/start -s dev
 ```
 
-After that a composer update: `composer update` is adviced.
+After that a composer update: `composer update` is advised.
 
 ### Alternative
 
@@ -82,26 +87,10 @@ Below we cover each of the configuration files and what their configuration para
 4. name - The name of the database you want to use to let The DataTank write its meta-data in.
 5. password - The password for the user to connect to the database.
 
-#### cores.json
-
-This file will contain the regular expressions that will route an HTTP-request to the correct destination.
-Uncomment the routes in the _core_ entry of the json file, and that should get you going.
-
 #### auth.json
 
 This file will contains your user(s) for the autheticated parts of The DataTank. Username and password are required.
 These users are used in combination with routes, serveral routes in the example cores file require the user `tdtadmin` for example, but here are some more:
-
-#####Example routes
-
-```javascript
-// Normal route
-"HTTP_METHOD | URI" : "CONTROLLER"
-// Single user
-"HTTP_METHOD | URI | @username" : "CONTROLLER"
-// Multiple users
-"HTTP_METHOD | URI | @username, @user2, @user3" : "CONTROLLER"
-```
 
 ### Virtual host
 

@@ -1,0 +1,14 @@
+{
+    "title" : "The DataTank extensions configuration schema",
+    "$schema" : "http://json-schema.org/draft-04/schema#",
+    "description": "The configuration object schema validation for tdtext configuration.",
+    "type" : "object",
+    "required" : true,
+    "properties":{
+        "classes" : {
+            "type" : "array",
+            "required" : true
+        }
+    },
+    "additionalProperties" : false
+}

@@ -24,26 +24,26 @@ require_once APPPATH . "core/configurator.php";
 // Load the configuration wrapper
 require_once APPPATH . "core/Config.php";
 
-// Load the start controllers
-require_once APPPATH . "controllers/ErrorController.class.php";
-require_once APPPATH . "controllers/DocumentationController.class.php";
-require_once APPPATH . "controllers/RedirectController.class.php";
-
 // Load auth classes
 require_once APPPATH . "auth/Auth.php";
 require_once APPPATH . "auth/BasicAuth.php";
 
-$c = new ErrorController();
+
+// Support for CGI/FastCGI
+if (!isset($_SERVER["REQUEST_URI"])) {
+    $_SERVER["REQUEST_URI"] = substr($_SERVER["PHP_SELF"], 1);
+    if (isset($_SERVER["QUERY_STRING"])) {
+        $_SERVER["REQUEST_URI"] .= "?" . $_SERVER["QUERY_STRING"];
+    }
+}
 
 // Keep cores as the last item
 $config_files = array(
     "general",
-    "routes",
     "db",
-    "cores",
+    "tdtext",
     "auth"
 );
-
 
 $config_validator = new Validator();
 // Check if all config files are present and validate them
@@ -69,6 +69,8 @@ foreach($config_files as $file){
 }
 
 // Start loading config files
+$config = "";
+
 try{
     $config = Configurator::load($config_files);
 }catch(Exception $e){
@@ -79,6 +81,9 @@ try{
 
 // Pass on the configuration
 app\core\Config::setConfig($config);
+
+// Initialize the timezone
+date_default_timezone_set(app\core\Config::get("general","timezone"));
 
 // General getallheaders function
 if (!function_exists("getallheaders" )){
@@ -96,8 +101,18 @@ if (!function_exists("getallheaders" )){
     }
 }
 
-// Start the router
-require_once APPPATH."core/router.php";
+// Drop subdir from the request
+$subdir = app\core\Config::get("general", "subdir");
+if (!empty($subdir)) {
+    try {
+        $_SERVER["REQUEST_URI"] = preg_replace("/^\/?" . str_replace('/', '\/', $subdir) . "/", "", $_SERVER["REQUEST_URI"]);
+    } catch (Exception $e) {
+        // Couldn't convert subdir to a regular expression
+    }
+}
+
+// Start the engines
+$core = new tdt\core\Router($config);
 
 // Hacking the brains of other people using fault injection
 // http://jlouisramblings.blogspot.dk/2012/12/hacking-brains-of-other-people-with-api.html
@@ -113,8 +128,6 @@ if(app\core\Config::get("general", "faultinjection", "enabled")){
 // Prepare the error handler defined at the end of this file
 set_error_handler("wrapper_handler");
 
-// Initialize the timezone
-date_default_timezone_set(app\core\Config::get("general","timezone"));
 
 // TODO: add Tracker
 
