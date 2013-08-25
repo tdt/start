@@ -20,6 +20,10 @@
                 "password" : {
                     "type" : "string",
                     "required" : true
+                },
+                "routes" : {
+                    "type" : "array",
+                    "required" : true
                 }
             }
         }

@@ -79,16 +79,39 @@ try{
     exit();
 }
 
-//TODO: handle authentication over here
-
 // Pass on the configuration
-
 app\core\Config::setConfig($config);
+
+// Handle authentication here
+$auth = app\core\Config::get("auth");
+foreach($auth as $user => $userauth){
+    foreach($userauth["routes"] as $route){
+        //splits route in method and route
+        $methodroutearray = explode("|", $route);
+        if(!isset($methodroutearray[1])){
+            echo "Check your auth.json, apparently you didn't add your routes properly. Your routes have to contain a HTTP Method and a regular expression, separated by a |.";
+            exit(0);
+        }
+        
+        $method = trim($methodroutearray[0]," ");
+        $route = trim($methodroutearray[1], " ");
+        
+        if(preg_match("/" . str_replace("/","\\/",$_SERVER["REQUEST_URI"]) . "/", $route)){
+            $type = 'app\\auth\\' . $userauth["type"];
+            $authenticator = new $type();
+            if(!$authenticator->isAuthenticated($user)){
+                $authenticator->authenticate();
+            }
+            break; //I should clean up code and rewrite this to while loop
+        }
+    }
+}
+
 
 // Initialize the timezone
 date_default_timezone_set(app\core\Config::get("general","timezone"));
 
-// General getallheaders function
+// Makes sure getallheaders works everywhere using any server configurations (CGI, apache, NGINX, etc)
 if (!function_exists("getallheaders" )){
     function getallheaders(){
         foreach ($_SERVER as $name => $value){
@@ -114,7 +137,7 @@ if (!empty($subdir)) {
     }
 }
 
-//unset authentication: the router doesn't have to know anything about the authentication mechanism. This is tdt/start's problem.
+//unset authentication: tdt/core doesn't have to know anything about the authentication mechanism. This is tdt/start's problem.
 unset($config["auth"]);
 
 // Start the engines
