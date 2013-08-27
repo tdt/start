@@ -4,27 +4,181 @@
         // Namespace for this core
         "namespace" : "tdt\\core",
         // Routes for this core
-        "routes": {
-          "GET | (?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)" : "controllers\\RController",
-          "GET | TDTAdmin/Resources/?(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
-          "PUT | TDTAdmin/Resources/?(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
-          "DELETE | TDTAdmin/Resources/?(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
-          "PATCH | TDTAdmin/Resources/?(?P<packageresourcestring>.*) | @tdtadmin" : "controllers\\CUDController",
-          "GET | spectql(?P<query>/TDTAdmin/?.*) | @tdtadmin" : "controllers\\SPECTQLController",
-          "GET | spectql(?P<query>/.*)" : "controllers\\SPECTQLController"
-        }
+        "routes": [
+            {
+                "documentation" : "General route to datasets that are in the datatank",
+                "method" : "GET",
+                "route" : "(?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)",
+                "controller" : "controllers\\RController",
+                "users" : [
+                ]
+            },
+            {
+                "documentation" : "Get admin documentation",
+                "method" : "GET",
+                "route" : "TDTAdmin/Resources/?(?P<packageresourcestring>.*)",
+                "controller" : "controllers\\CUDController",
+                "users" : [
+                    "tdtadmin"
+                ]
+            },
+            {
+                "documentation" : "Add a definition of a dataset",
+                "method" : "PUT",
+                "route" : "TDTAdmin/Resources/?(?P<packageresourcestring>.*)",
+                "controller" : "controllers\\CUDController",
+                "users" : [
+                    "tdtadmin"
+                ]
+            },
+            {
+                "documentation" : "Delete a definition of a dataset",
+                "method" : "DELETE",
+                "route" : "TDTAdmin/Resources/?(?P<packageresourcestring>.*)",
+                "controller" : "controllers\\CUDController",
+                "users" : [
+                    "tdtadmin"
+                ]
+            },
+            {
+                "documentation" : "Update the definition of a dataset",
+                "method" : "PATCH",
+                "route" : "TDTAdmin/Resources/?(?P<packageresourcestring>.*)",
+                "controller" : "controllers\\CUDController",
+                "users" : [
+                    "tdtadmin"
+                ]
+            },
+            {
+                "documentation" : "SPECTQL admin route",
+                "method" : "GET",
+                "route" : "spectql(?P<query>/TDTAdmin/?.*)",
+                "controller" : "controllers\\SPECTQLController",
+                "users" : [
+                    "tdtadmin"
+                ]
+            },
+            {
+                "documentation" : "SPECTQL route",
+                "method" : "GET",
+                "route" : "spectql(?P<query>/.*)",
+                "controller" : "controllers\\SPECTQLController",
+                "users" : [
+                ]
+            }
+        ]
     },
     // Input core
     "input" : {
         "namespace" : "tdt\\input",
-        "routes" : {
-            "GET | TDTInput/Worker/? | @worker" : "scheduler\\controllers\\Worker",
-            "GET | TDTInput/?(?P<format>\\.[a-zA-Z]+)? | @jobadmin" : "scheduler\\controllers\\InputResourceController",
-            "GET | TDTInput/(?P<resource>.+)\\.(?P<format>[a-zA-Z]+) | @jobadmin" : "scheduler\\controllers\\InputResourceController",
-            "GET | TDTInput/(?P<resource>.+?)(?P<test>/test)? | @jobadmin" : "scheduler\\controllers\\InputResourceController",
-            "PUT | TDTInput/(?P<resource>.+) | @jobadmin" : "scheduler\\controllers\\InputResourceController",
-            "POST | TDTInput/? | @jobadmin" : "scheduler\\controllers\\InputResourceController",
-            "DELETE | TDTInput/(?P<resource>.+) | @jobadmin" : "scheduler\\controllers\\InputResourceController"
-        }
+        "routes" : [
+            {
+                "documentation" : "",
+                "method" : "GET",
+                "route" : "TDTInput/Worker/?",
+                "controller" : "scheduler\\controllers\\Worker",
+                "users" : [
+                    "worker"
+                ]
+            },
+            {
+                "documentation" : "",
+                "method" : "GET",
+                "route" : "TDTInput/?(?P<format>\\.[a-zA-Z]+)?",
+                "controller" : "scheduler\\controllers\\InputResourceController",
+                "users" : [
+                    "jobadmin"
+                ]
+            },
+            {
+                "documentation" : "",
+                "method" : "GET",
+                "route" : "TDTInput/(?P<resource>.+)\\.(?P<format>[a-zA-Z]+)",
+                "controller" : "scheduler\\controllers\\InputResourceController",
+                "users" : [
+                    "jobadmin"
+                ]
+            },
+            {
+                "documentation" : "",
+                "method" : "GET",
+                "route" : "TDTInput/(?P<resource>.+?)(?P<test>/test)?",
+                "controller" : "scheduler\\controllers\\InputResourceController",
+                "users" : [
+                    "jobadmin"
+                ]
+            },
+            {
+                "documentation" : "",
+                "method" : "PUT",
+                "route" : "TDTInput/(?P<resource>.+)",
+                "controller" : "scheduler\\controllers\\InputResourceController",
+                "users" : [
+                    "jobadmin"
+                ]
+            },
+            {
+                "documentation" : "",
+                "method" : "POST",
+                "route" : "TDTInput/?",
+                "controller" : "scheduler\\controllers\\InputResourceController",
+                "users" : [
+                    "jobadmin"
+                ]
+            },
+            {
+                "documentation" : "",
+                "method" : "DELETE",
+                "route" : "TDTInput/(?P<resource>.+)",
+                "controller" : "scheduler\\controllers\\InputResourceController",
+                "users" : [
+                    "jobadmin"
+                ]
+            },
+            {
+                "documentation": "",
+                "method": "POST",
+                "route": "TDTInput\/?",
+                "controller": "scheduler\\controllers\\InputResourceController",
+                "users": [
+                    "root"
+                ]
+            },
+            {
+                "documentation": "",
+                "method": "POST",
+                "route": "TDTInput\/test\/?",
+                "controller": "scheduler\\controllers\\TestController",
+                "users": [
+
+                ]
+            }
+        ]
+    },
+    // UI core
+    "ui" : {
+        // Namespace for this core
+        "namespace" : "tdt\\ui",
+        // Routes for this core
+        "routes": [
+            {
+                "documentation" : "General path for all GET requests to The Datank UI",
+                "method" : "GET",
+                "route" : "^ui.*",
+                "controller" : "controllers\\UiResourceController",
+                "users" : [
+                    "tdtuiadmin"
+                ]
+            },
+            {
+                "documentation" : "General path for all POST requests to The Datank UI",
+                "method" : "POST",
+                "route" : "^ui.*",
+                "controller" : "controllers\\UiResourceController",
+                "users" : [
+                    "tdtuiadmin"
+                ]
+            }
+        ]
     }
 }

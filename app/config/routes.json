@@ -1,7 +1,20 @@
-{
-    "GET | /" : "DocumentationController",
-
+[
+    {
+        "documentation" : "Documentation route",
+        "method" : "GET",
+        "route" : "/",
+        "controller" : "DocumentationController",
+        "users" : [
+        ]
+    },
     // You cannot get a real-world object, only its representation.
     // Therefore we're going to redirect you to .about which will do content negotiation.
-    "GET | /(.(?!\\.[a-zA-Z]+(\\?.+)?))+" : "RedirectController"
-}
+    {
+        "documentation" : "Redirect to content negotiation",
+        "method" : "GET",
+        "route" : "/(.(?!\\.[a-zA-Z]+(\\?.+)?))+",
+        "controller" : "RedirectController",
+        "users" : [
+        ]
+    }
+]

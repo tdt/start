@@ -40,26 +40,16 @@ $allroutes = app\core\Config::get("routes");
 
 
 // Only keep the routes that use the requested HTTP method
-$unsetkeys = preg_grep("/^" . strtoupper($_SERVER['REQUEST_METHOD']) . "/", array_keys($allroutes), PREG_GREP_INVERT);
-foreach ($unsetkeys as $key) {
-    unset($allroutes[$key]);
+foreach ($allroutes as $key => $route){
+    if (strcmp($route['method'],strtoupper($_SERVER['REQUEST_METHOD'])) != 0){
+        unset($allroutes[$key]);
+    }
 }
-
-$routes = array();
-// Drop the HTTP method from the route
-foreach ($allroutes as $route => $controller) {
-    $route = preg_replace('/^' . strtoupper($_SERVER['REQUEST_METHOD']) . '(\s|\t)*\|(\s|\t)*/', "", trim($route));
-    $routes[trim($route)] = trim($controller);
-}
-
-//$log->logInfo("The routes we are working with", $routes);
 
 try {
     // This function will do the magic.
-    Glue::stick($routes);
-} catch (Exception $e) {
-
-    // Instantiate a Logger
+    Glue::stick($allroutes);
+} catch (tdt\exceptions\TDTException $e) {
     $log = new Logger('router');
     $log->pushHandler(new StreamHandler(app\core\Config::get("general", "logging", "path") . "/log_" . date('Y-m-d') . ".txt", Logger::ERROR));
 
