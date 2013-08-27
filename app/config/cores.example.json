@@ -16,7 +16,7 @@
             {
                 "documentation" : "Get admin documentation",
                 "method" : "GET",
-                "route" : "definitions/resources/?(?P<packageresourcestring>.*)",
+                "route" : "definitions/?(?P<packageresourcestring>.*)",
                 "controller" : "controllers\\CUDController",
                 "users" : [
                     "tdtadmin"
@@ -25,7 +25,7 @@
             {
                 "documentation" : "Add a definition of a dataset",
                 "method" : "PUT",
-                "route" : "definitions/resources/?(?P<packageresourcestring>.*)",
+                "route" : "definitions/?(?P<packageresourcestring>.*)",
                 "controller" : "controllers\\CUDController",
                 "users" : [
                     "tdtadmin"
@@ -34,7 +34,7 @@
             {
                 "documentation" : "Delete a definition of a dataset",
                 "method" : "DELETE",
-                "route" : "definitions/resources/?(?P<packageresourcestring>.*)",
+                "route" : "definitions/?(?P<packageresourcestring>.*)",
                 "controller" : "controllers\\CUDController",
                 "users" : [
                     "tdtadmin"
@@ -43,7 +43,7 @@
             {
                 "documentation" : "Update the definition of a dataset",
                 "method" : "PATCH",
-                "route" : "definitions/resources/?(?P<packageresourcestring>.*)",
+                "route" : "definitions/?(?P<packageresourcestring>.*)",
                 "controller" : "controllers\\CUDController",
                 "users" : [
                     "tdtadmin"
