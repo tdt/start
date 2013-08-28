@@ -16,7 +16,7 @@
             {
                 "documentation" : "Get admin documentation",
                 "method" : "GET",
-                "route" : "definitions/?(?P<packageresourcestring>.*)",
+                "route" : "definitions/?(?P<packageresourcestring>.*)\\.(?P<format>[^?]+).*\\??(.*)",
                 "controller" : "controllers\\CUDController",
                 "users" : [
                     "tdtadmin"
